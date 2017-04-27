@@ -22,7 +22,6 @@ CREATE TABLE movie (
   id          SERIAL       NOT NULL PRIMARY KEY,
   name        VARCHAR(150) NOT NULL,
   description TEXT,
-  type        VARCHAR(100) NOT NULL,
   year        INT          NOT NULL,
   created_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -38,10 +37,19 @@ CREATE TABLE favorite (
   UNIQUE (user_id, movie_id)
 );
 
-INSERT INTO users (name, username, password, enabled)
-VALUES ('Administrador', 'admin', '$2a$10$IV1.6EyW2KvKOhlLf8mFYuK6JEjWvrfqDXm1c9wPMcfQW2/ywaS4G', TRUE);
+CREATE TABLE type (
+  id         SERIAL       NOT NULL PRIMARY KEY,
+  name       VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE (name)
+);
 
-INSERT INTO user_role (user_id, role)
-VALUES ((SELECT id
-         FROM users
-         WHERE username = 'admin'), 'ROLE_ADMIN');
+CREATE TABLE movie_type (
+  id         SERIAL    NOT NULL PRIMARY KEY,
+  type_id    INT       NOT NULL REFERENCES type (id),
+  movie_id   INT       NOT NULL REFERENCES movie (id),
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE (type_id, movie_id)
+);

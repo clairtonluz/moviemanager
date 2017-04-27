@@ -3,6 +3,7 @@ package br.com.clairtonluz.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "movie")
@@ -14,8 +15,9 @@ public class Movie extends BaseEntity {
     @NotNull(message = "nome é obrigatório")
     private String name;
     private String description;
-    @NotNull(message = "Tipo é obrigatório")
-    private String type;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "movie_type", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "type_id"))
+    private List<Type> types;
     @NotNull(message = "Ano é obrigatório")
     private Integer year;
 
@@ -35,12 +37,12 @@ public class Movie extends BaseEntity {
         this.description = description;
     }
 
-    public String getType() {
-        return type;
+    public List<Type> getTypes() {
+        return types;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypes(List<Type> types) {
+        this.types = types;
     }
 
     public Integer getYear() {

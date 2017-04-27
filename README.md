@@ -14,16 +14,6 @@ GRANT ALL PRIVILEGES ON DATABASE moviemanager to moviemanager;
 \q
 ```
 
-Setup project
--------------
-```shell
-cd path_to_project
-
-npm install
-bower install
-
-```
-
 Credentials default to login in system
 --------------------------------------
 user:admin

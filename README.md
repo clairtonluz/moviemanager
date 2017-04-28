@@ -10,7 +10,7 @@ psql -U postgres -d postgres -h localhost -W
 ```sql
 CREATE USER moviemanager WITH PASSWORD 'moviemanager';
 CREATE DATABASE moviemanager;
-GRANT ALL PRIVILEGES ON DATABASE moviemanager to moviemanager;
+ALTER DATABASE moviemanager owner to moviemanager;
 \q
 ```
 

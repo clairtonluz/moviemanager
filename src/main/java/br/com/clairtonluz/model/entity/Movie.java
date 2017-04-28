@@ -15,6 +15,8 @@ public class Movie extends BaseEntity {
     @NotNull(message = "nome é obrigatório")
     private String name;
     private String description;
+    @Column(name = "url_image")
+    private String urlImage;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "movie_type", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "type_id"))
     private List<Type> types;
@@ -60,5 +62,13 @@ public class Movie extends BaseEntity {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }

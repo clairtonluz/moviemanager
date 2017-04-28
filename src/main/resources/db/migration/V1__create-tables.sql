@@ -21,6 +21,7 @@ CREATE TABLE user_role (
 CREATE TABLE movie (
   id          SERIAL       NOT NULL PRIMARY KEY,
   name        VARCHAR(150) NOT NULL,
+  url_image   VARCHAR(255),
   description TEXT,
   year        INT          NOT NULL,
   created_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,

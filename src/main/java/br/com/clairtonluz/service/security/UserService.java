@@ -13,17 +13,15 @@ public class UserService {
 
     public User findById(Integer id) {
         User user = userRepository.findOne(id);
-        removePassword(user);
         return user;
     }
 
     public User findByUsername(String username) {
         User user = userRepository.findByUsername(username);
-        removePassword(user);
         return user;
     }
 
-    private void removePassword(User user) {
+    public void removePassword(User user) {
         if (user != null) {
             user.setPassword(null);
         }

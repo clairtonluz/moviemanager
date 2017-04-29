@@ -2,6 +2,7 @@ package br.com.clairtonluz.service;
 
 import br.com.clairtonluz.model.entity.Favorite;
 import br.com.clairtonluz.repository.FavoriteRepository;
+import br.com.clairtonluz.repository.security.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ public class FavoriteService {
 
     @Autowired
     private FavoriteRepository favoriteRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public Favorite findById(Integer id) {
         return favoriteRepository.findOne(id);
@@ -26,10 +29,11 @@ public class FavoriteService {
     @Transactional
     public void delete(Integer id) {
         Favorite favorite = favoriteRepository.findOne(id);
-        favoriteRepository.delete(favorite);
+        if (favorite != null)
+            favoriteRepository.delete(favorite);
     }
 
     public List<Favorite> findByUser(Integer userId) {
-        return favoriteRepository.findByUserId(userId);
+        return favoriteRepository.findByUserIdOrderByUpdatedAtDesc(userId);
     }
 }

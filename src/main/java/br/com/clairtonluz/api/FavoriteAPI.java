@@ -1,5 +1,6 @@
 package br.com.clairtonluz.api;
 
+import br.com.clairtonluz.exception.BadRequestException;
 import br.com.clairtonluz.exception.ForbiddenException;
 import br.com.clairtonluz.model.entity.Favorite;
 import br.com.clairtonluz.model.entity.security.User;
@@ -41,6 +42,9 @@ public class FavoriteAPI {
 
     @RequestMapping(method = RequestMethod.POST)
     public Favorite save(Principal principal, @Valid @RequestBody Favorite favorite) {
+        if (favorite.getId() != null) {
+            throw new BadRequestException("Operação inválida");
+        }
         User user = userService.findByUsername(principal.getName());
         favorite.setUserId(user.getId());
         return favoriteService.save(favorite);

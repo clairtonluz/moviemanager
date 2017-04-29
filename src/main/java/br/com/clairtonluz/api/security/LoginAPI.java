@@ -16,6 +16,8 @@ public class LoginAPI {
 
     @RequestMapping("/api/login")
     public User user(Principal principal) {
-        return userService.findByUsername(principal.getName());
+        User user = userService.findByUsername(principal.getName());
+        userService.removePassword(user);
+        return user;
     }
 }

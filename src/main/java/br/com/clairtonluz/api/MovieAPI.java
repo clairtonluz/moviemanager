@@ -1,6 +1,5 @@
 package br.com.clairtonluz.api;
 
-import br.com.clairtonluz.model.entity.Favorite;
 import br.com.clairtonluz.model.entity.Movie;
 import br.com.clairtonluz.service.FavoriteService;
 import br.com.clairtonluz.service.MovieService;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @RestController()
 @RequestMapping("api/movies")
@@ -46,20 +44,6 @@ public class MovieAPI {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void remove(@PathVariable @NotNull Integer id) {
         movieService.delete(id);
-    }
-
-    @RequestMapping(value = "/{id}/favorites", method = RequestMethod.GET)
-    public List<Favorite> getFavoriteById(@PathVariable Integer id) {
-        return favoriteService.findByUser(id);
-    }
-
-    @RequestMapping(value = "/{id}/favorites/{favoriteId}", method = RequestMethod.GET)
-    public Favorite getFavoriteById(@PathVariable Integer id, @PathVariable Integer favoriteId) {
-        Favorite favorite = favoriteService.findById(favoriteId);
-        if (favorite != null && favorite.getUserId().equals(id)) {
-            return favorite;
-        }
-        return null;
     }
 
 }

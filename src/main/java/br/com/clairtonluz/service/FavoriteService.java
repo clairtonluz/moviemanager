@@ -23,6 +23,10 @@ public class FavoriteService {
 
     @Transactional
     public Favorite save(Favorite favorite) {
+        Favorite existente = favoriteRepository.findByUserIdAndMovie(favorite.getUserId(), favorite.getMovie());
+        if (existente != null) {
+            return existente;
+        }
         return favoriteRepository.save(favorite);
     }
 

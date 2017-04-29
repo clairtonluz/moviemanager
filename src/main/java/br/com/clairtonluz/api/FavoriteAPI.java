@@ -2,6 +2,7 @@ package br.com.clairtonluz.api;
 
 import br.com.clairtonluz.exception.BadRequestException;
 import br.com.clairtonluz.exception.ForbiddenException;
+import br.com.clairtonluz.exception.NotFoundException;
 import br.com.clairtonluz.model.entity.Favorite;
 import br.com.clairtonluz.model.entity.security.User;
 import br.com.clairtonluz.service.FavoriteService;
@@ -70,10 +71,14 @@ public class FavoriteAPI {
     private boolean hasPermission(Integer favoriteId, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         Favorite favorite = favoriteService.findById(favoriteId);
-        if (favorite.getUserId().equals(user.getId())) {
-            return true;
-        } else {
-            throw new ForbiddenException();
+        if (favorite == null) {
+            throw new NotFoundException();
         }
+
+        if (!favorite.getUserId().equals(user.getId())) {
+            throw new ForbiddenException("Você não tem permissão para alterar esse recurso");
+        }
+
+        return true;
     }
 }

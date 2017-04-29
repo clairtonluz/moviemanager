@@ -2,7 +2,7 @@ package br.com.clairtonluz.exception;
 
 public class ForbiddenException extends RuntimeException {
     public ForbiddenException() {
-        super("Operação não permitida");
+        super("Permissão negada");
     }
 
     public ForbiddenException(String message) {

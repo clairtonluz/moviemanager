@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class MovieService {
@@ -32,7 +33,7 @@ public class MovieService {
         movieRepository.delete(movie);
     }
 
-    public Movie findByName(String name) {
-        return movieRepository.findByName(name);
+    public List<Movie> findByNameLike(String name) {
+        return movieRepository.findByNameIgnoreCaseContaining(name);
     }
 }

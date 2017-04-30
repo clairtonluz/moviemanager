@@ -22,8 +22,12 @@ public class MovieAPI {
     private FavoriteService favoriteService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<Movie> query() {
-        return movieService.findAll();
+    public Iterable<Movie> query(@RequestParam(name = "name", required = false) String name) {
+        if (name != null && !name.trim().isEmpty()) {
+            return movieService.findByNameLike(name);
+        } else {
+            return movieService.findAll();
+        }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

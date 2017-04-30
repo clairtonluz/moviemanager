@@ -18,3 +18,16 @@ Credentials default to login in system
 --------------------------------------
 user:admin
 pass:admin
+
+Executando o projeto
+--------------------
+Entra no diretório do projeto e executa o seguinte comando:
+
+Linux:
+```shel
+    ./gradlew bootRun
+```
+Windows:
+   ```shel
+       gradlew.exe bootRun
+   ```

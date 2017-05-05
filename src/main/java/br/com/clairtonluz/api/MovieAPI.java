@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @RestController()
+@CrossOrigin(origins = "*")
 @RequestMapping("api/movies")
 public class MovieAPI {
 

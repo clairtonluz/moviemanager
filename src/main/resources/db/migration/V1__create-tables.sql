@@ -37,20 +37,3 @@ CREATE TABLE favorite (
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE (user_id, movie_id)
 );
-
-CREATE TABLE type (
-  id         SERIAL       NOT NULL PRIMARY KEY,
-  name       VARCHAR(100) NOT NULL,
-  created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE (name)
-);
-
-CREATE TABLE movie_type (
-  id         SERIAL    NOT NULL PRIMARY KEY,
-  type_id    INT       NOT NULL REFERENCES type (id),
-  movie_id   INT       NOT NULL REFERENCES movie (id),
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE (type_id, movie_id)
-);

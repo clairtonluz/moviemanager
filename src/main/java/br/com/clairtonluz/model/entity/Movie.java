@@ -17,9 +17,6 @@ public class Movie extends BaseEntity {
     private String description;
     @Column(name = "url_image")
     private String urlImage;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "movie_type", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "type_id"))
-    private List<Type> types;
     @NotNull(message = "Ano é obrigatório")
     private Integer year;
 
@@ -37,14 +34,6 @@ public class Movie extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Type> getTypes() {
-        return types;
-    }
-
-    public void setTypes(List<Type> types) {
-        this.types = types;
     }
 
     public Integer getYear() {

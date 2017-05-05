@@ -16,6 +16,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController()
+@CrossOrigin(origins = "*")
 @RequestMapping("api/favorites")
 public class FavoriteAPI {
 
